@@ -5,11 +5,17 @@
 >
   <div class="w-[32vw] bg-white px-20 py-20 rounded-[30px]">
     <h1
-      class="text-4xl capitalize text-center text-zinc-700 tracking-tighter leading-none"
+      class="text-4xl mb-5 capitalize text-center text-zinc-700 tracking-tighter leading-none"
     >
       Create New Account
     </h1>
-    <form action="" method="post">
+    <form action="/register" method="post">
+      <input
+        class="border-2 rounded-md mt-2 w-full px-3 py-2"
+        type="text"
+        name="fullname"
+        placeholder="fullname"
+      />
       <input
         class="border-2 rounded-md mt-2 w-full px-3 py-2"
         type="text"
@@ -49,7 +55,7 @@
     </form>
     <a
       href="/"
-      class="w-full inline-block mt-2 text-sm text-center text-zinc-700 font-semibold"
+      class="w-full inline-block mt-2 text-sm text-center text-zinc-700 font-semibold hover:underline"
       >Login Existing Account</a
     >
   </div>
