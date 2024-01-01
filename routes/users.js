@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
   email: String,
   contact: Number,
   password: String,
+  profileImage:String,
   boards: {
     type: Array,
     default: [],
