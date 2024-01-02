@@ -1,6 +1,6 @@
 .git
 
-public/images/uploads/
+public/images/
 node_modules
 
 package-lock.json
