@@ -1,9 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const userModel = require("./users");
+const postModel = require("./post");
 const passport = require("passport");
 const localStrategy = require("passport-local");
-const upload = require('./multer');
+const pfpupload = require('./multerProfileImage');
+const postupload = require('./multerPostsUpload');
+const fs = require('fs');
+const path = require("path");
 
 passport.use(new localStrategy(userModel.authenticate()));
 let nav= false;
@@ -15,15 +19,50 @@ router.get("/register", (req, res) => {
   res.render("register",{nav});
 });
 router.get("/profile", isLoggedIn, async (req, res) => {
-  const user = await userModel.findOne({username:req.session.passport.user})
+  const user = await userModel.findOne({username:req.session.passport.user}).populate("posts")
+  
+  // console.log(user);
   res.render("profile",{user,nav:true});
 });
-router.post("/fileupload", isLoggedIn, upload.single("image"), async (req, res) => {
+
+router.get("/addpost", isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({username:req.session.passport.user})
+  res.render("add",{user,nav:true});
+});
+router.post("/createpost", isLoggedIn,postupload.single("postimage"), async (req, res) => {
+  const user = await userModel.findOne({username:req.session.passport.user})
+  const post = await postModel.create({
+    user:user._id,
+    title:req.body.title,
+    description:req.body.description,
+    image:req.file.fielname
+  })
+  user.posts.push(post._id)
+  await user.save()
+  res.redirect("/profile")
+});
+
+router.post("/fileupload", isLoggedIn, pfpupload.single("image"), async (req, res) => {
+  const user = await userModel.findOne({username:req.session.passport.user})
+
+  //Deleting the previous profile picture
+  const prevPfp = await user?.profileImage;
+  const imagePath = path.join(__dirname,"../public/images/profileImages/",prevPfp)
+  if (prevPfp) {
+    fs.unlinkSync(imagePath);
+  } else {
+    console.log('Image file does not exist');
+  }
+  
+  //Updating new profile
   user.profileImage = req.file.filename;
+
   await user.save()
   res.redirect("./profile")
 });
+
+
+
 router.post("/register",async (req, res) => {
   const data = new userModel({
     fullname: req.body.fullname,
