@@ -13,6 +13,12 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  posts:[
+    {
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"posts"
+    }
+  ]
 });
 userSchema.plugin(plm)
 module.exports = mongoose.model("users", userSchema);
