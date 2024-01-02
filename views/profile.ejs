@@ -12,9 +12,9 @@
         <i class="text-zinc-800 ri-pencil-fill"></i>
       </span>
       <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
-        <!-- src="https://i.pinimg.com/564x/52/06/c2/5206c22944d81fa9f67489cbfffc76cc.jpg" -->
+        
         <img
-          src="/images/uploads/<%=user.profileImage%>"
+          src="/images/profileImages/<%=user.profileImage%>"
           class="object-cover"
           alt="profile picture"
         />
@@ -27,23 +27,23 @@
       class="mt-5 px-7 py-2 bg-zinc-700 font-semibold text-xs rounded-full"
       >Edit</a
     >
-    <button
+    <a href="/addpost"
       class="px-10 py-2 text-xs font-semibold bg-red-700 rounded-lg mt-10"
     >
       Add new post
-    </button>
+    </a>
   </section>
   <section class="cards flex flex-wrap gap-10 px-10 mt-10">
     <div class="card">
       <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
         <img
-          src="https://i.pinimg.com/564x/1e/03/02/1e0302d5e74bc1ecf676de6f0c9c746d.jpg"
+          src="/images/postImages/<%= user.posts[0]?.image %>"
           class="w-full h-full object-cover"
           alt=""
         />
       </div>
-      <h3 class="text-xl font-semibold mt-3">All pins</h3>
-      <h5 class="text-medium font-semibold opacity-60">28 pins</h5>
+      <h3 class="text-xl font-semibold mt-3">Your Uploaded Pins</h3>
+      <h5 class="text-medium font-semibold opacity-60"><%= user.posts.length%> pins</h5>
     </div>
   </section>
 </main>

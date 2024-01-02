@@ -21,7 +21,7 @@ router.get("/register", (req, res) => {
 router.get("/profile", isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({username:req.session.passport.user}).populate("posts")
   
-  // console.log(user);
+  console.log(user);
   res.render("profile",{user,nav:true});
 });
 
@@ -35,7 +35,7 @@ router.post("/createpost", isLoggedIn,postupload.single("postimage"), async (req
     user:user._id,
     title:req.body.title,
     description:req.body.description,
-    image:req.file.fielname
+    image:req.file.filename
   })
   user.posts.push(post._id)
   await user.save()
