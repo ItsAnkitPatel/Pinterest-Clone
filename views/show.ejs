@@ -1,0 +1,18 @@
+<%include ./partials/header%>
+<section class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white">
+  <div class="cards flex flex-wrap gap-10">
+    <%user.posts.forEach(function(element){%>
+    <div class="card w-32">
+      <div class="w-full h-40">
+        <img
+          class="w-full h-full object-cover rounded-lg overflow-hidden"
+          src="/images/postImages/<%=element.image%>"
+          alt=""
+        />
+        <h5 class="mt-2 text-sm"><%=element.title%></h5>
+      </div>
+    </div>
+    <%})%>
+  </div>
+</section>
+<%include ./partials/footer%>

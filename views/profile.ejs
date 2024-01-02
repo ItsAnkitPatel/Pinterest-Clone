@@ -35,14 +35,14 @@
   </section>
   <section class="cards flex flex-wrap gap-10 px-10 mt-10">
     <div class="card">
-      <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
+      <a href="/showposts" class="block w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
         <img
           src="/images/postImages/<%= user.posts[0]?.image %>"
           class="w-full h-full object-cover"
           alt=""
         />
-      </div>
-      <h3 class="text-xl font-semibold mt-3">Your Uploaded Pins</h3>
+      </a>
+      <a href="/showposts" class="inline-block hover:underline text-xl font-semibold mt-3">Your Uploaded Pins</a>
       <h5 class="text-medium font-semibold opacity-60"><%= user.posts.length%> pins</h5>
     </div>
   </section>
