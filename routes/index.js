@@ -59,8 +59,9 @@ router.post("/fileupload", isLoggedIn, pfpupload.single("image"), async (req, re
 
   //Deleting the previous profile picture
   const prevPfp = await user?.profileImage;
-  const imagePath = path.join(__dirname,"../public/images/profileImages/",prevPfp)
+  
   if (prevPfp) {
+    const imagePath = path.join(__dirname,"../public/images/profileImages/",prevPfp)
     fs.unlinkSync(imagePath);
   } else {
     console.log('Image file does not exist');
